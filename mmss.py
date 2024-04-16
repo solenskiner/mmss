@@ -49,7 +49,7 @@ def select(countries):
         sys.exit(-4)
 
     for (relay, ips) in relays.items():
-        if not any([country in relay for country in countries]):
+        if not any([country.lower() in relay.lower() for country in countries]):
             for ip in ips:
                 if 0 != subprocess.run(("sudo ipset -! add cs2_mm_relays %s" % ip).split()).returncode:
                     print("ip: %s" % (ip), file=sys.stderr)
